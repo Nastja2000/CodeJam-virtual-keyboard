@@ -153,9 +153,26 @@ Object(_keyboardView__WEBPACK_IMPORTED_MODULE_0__["default"])();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _generalFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generalFunctions */ "./src/js/generalFunctions.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-function createKeyboardView() {
+var buttonsLayout = [[['Backquote', 'ё', 'Ё', '`', '~'], ['Digit1', '1', '!', '1', '!'], ['Digit2', '2', '"', '2', '@'], ['Digit3', '3', '№', '3', '#'], ['Digit4', '4', ';', '4', '$'], ['Digit5', '5', '%', '5', '%'], ['Digit6', '6', ':', '6', '^'], ['Digit7', '7', '?', '7', '&'], ['Digit8', '8', '*', '8', '*'], ['Digit9', '9', '(', '9', '('], ['Digit0', '0', ')', '0', ')'], ['Digit-', '-', '_', '-', '_'], ['Equal=', '=', '+', '=', '+'], ['Backspace', 'Backspace', 'Backspace', 'Backspace', 'Backspace']], [['Tab', 'Tab', 'Tab', 'Tab', 'Tab'], ['KeyQ', 'й', 'Й', 'q', 'Q'], ['KeyW', 'ц', 'Ц', 'w', 'W'], ['KeyE', 'у', 'У', 'e', 'E'], ['KeyR', 'к', 'К', 'r', 'R'], ['KeyT', 'е', 'Е', 't', 'T'], ['KeyY', 'н', 'Н', 'y', 'Y'], ['KeyU', 'г', 'Г', 'u', 'U'], ['KeyI', 'ш', 'Ш', 'i', 'I'], ['KeyO', 'щ', 'Щ', 'o', 'O'], ['KeyP', 'з', 'З', 'p', 'P'], ['BracketLeft', 'х', 'Х', '[', '{'], ['BracketRight', 'ъ', 'Ъ', ']', '}'], ['Backslash', '\\', '/', '\\', '|']], [['CapsLock', 'CapsLock', 'CapsLock', 'CapsLock', 'CapsLock'], ['KeyA', 'ф', 'Ф', 'a', 'A'], ['KeyS', 'ы', 'Ы', 's', 'S'], ['KeyD', 'в', 'В', 'd', 'D'], ['KeyF', 'а', 'А', 'f', 'F'], ['KeyG', 'п', 'П', 'g', 'G'], ['KeyH', 'р', 'Р', 'h', 'H'], ['KeyJ', 'о', 'О', 'j', 'J'], ['KeyK', 'л', 'Л', 'k', 'K'], ['KeyL', 'д', 'Д', 'l', 'L'], ['Semicolon', 'ж', 'Ж', ';', ':'], ['Quote', 'э', 'Э', '\'', '"'], ['Enter', 'Enter', 'Enter', 'Enter', 'Enter']], [['ShiftLeft', 'Shift', 'Shift', 'Shift', 'Shift'], ['KeyZ', 'я', 'Я', 'z', 'Z'], ['KeyX', 'ч', 'Ч', 'x', 'X'], ['KeyC', 'с', 'С', 'c', 'C'], ['KeyV', 'м', 'М', 'v', 'V'], ['KeyB', 'и', 'И', 'b', 'B'], ['KeyN', 'т', 'Т', 'n', 'N'], ['KeyM', 'ь', 'Ь', 'm', 'M'], ['Comma', 'б', 'Б', ',', '<'], ['Period', 'ю', 'Ю', '.', '>'], ['Slash', '.', ',', '/', '?'], ['ArrowUp', String.fromCharCode(8593), String.fromCharCode(8593), String.fromCharCode(8593), String.fromCharCode(8593)], ['ShiftRight', 'Shift', 'Shift', 'Shift', 'Shift']], [['ControlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['OSLeft', 'Win', 'Win', 'Win', 'Win'], ['AltLeft', 'Alt', 'Alt', 'Alt', 'Alt'], ['Space', 'Space', 'Space', 'Space', 'Space'], ['AltRight', 'Alt', 'Alt', 'Alt', 'Alt'], ['ControlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['ArrowLeft', String.fromCharCode(8592), String.fromCharCode(8592), String.fromCharCode(8592), String.fromCharCode(8592)], ['ArrowDown', String.fromCharCode(8595), String.fromCharCode(8595), String.fromCharCode(8595), String.fromCharCode(8595)], ['ArrowRight', String.fromCharCode(8594), String.fromCharCode(8594), String.fromCharCode(8594), String.fromCharCode(8594)]]];
+
+var getLocalLanguage = function getLocalLanguage() {
+  return localStorage.getItem('language') || 'en';
+};
+
+var createKeyboardView = function createKeyboardView() {
   var wrapper = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(wrapper, 'div', 'wrapper');
   document.body.append(wrapper);
   var textarea = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(textarea, 'textarea', 'textarea');
@@ -163,8 +180,62 @@ function createKeyboardView() {
   textarea.setAttribute('cols', 100);
   textarea.setAttribute('rows', 15);
   var keyboardContainer = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(keyboardContainer, 'div', 'keyboard-container');
+  buttonsLayout.forEach(function (row) {
+    row.forEach(function (element) {
+      var button = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(button, 'button');
+
+      var _element = _slicedToArray(element, 5),
+          code = _element[0],
+          ruLittle = _element[1],
+          ruBig = _element[2],
+          enLittle = _element[3],
+          enBig = _element[4];
+
+      button.classList.add('keyboard__button', code);
+
+      switch (element[0]) {
+        case 'Space':
+          button.classList.add('keyboard__button_the-widest');
+          break;
+
+        case 'Backspace':
+        case 'CapsLock':
+        case 'ShiftLeft':
+        case 'Enter':
+          button.classList.add('keyboard__button_wider');
+          break;
+
+        case 'ShiftRight':
+          button.classList.add('keyboard__key-base-width');
+          break;
+
+        default:
+          {
+            break;
+          }
+      }
+
+      keyboardContainer.append(button);
+      var ruLang = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'ru');
+      var enLang = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'en');
+      var language = getLocalLanguage();
+      if (language === 'en') enLang.classList.add('current');else ruLang.classList.add('current');
+      button.append(ruLang, enLang);
+      var ruLowerCase = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'small', 'on');
+      ruLowerCase.textContent = ruLittle;
+      var ruUpperCase = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'big');
+      ruUpperCase.textContent = ruBig;
+      ruLang.append(ruLowerCase, ruUpperCase);
+      var enLowerCase = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'small', 'on');
+      enLowerCase.textContent = enLittle;
+      var enUpperCase = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'big');
+      enUpperCase.textContent = enBig;
+      enLang.append(enLowerCase, enUpperCase);
+    });
+    keyboardContainer.append(document.createElement('br'));
+  });
   wrapper.append(textarea, keyboardContainer);
-}
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (createKeyboardView);
 

@@ -5,6 +5,46 @@ html {
 body {
   background-color: gold; }
 
+.active {
+  background-color: rgba(255, 215, 0, 0.5);
+  border: 2px solid rgba(223, 179, 10, 0.5); }
+
+.keyboard__button {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: top;
+  font-size: 1.4rem;
+  color: #333;
+  border-radius: 3px;
+  border: 1px solid #c2c2c2;
+  background-color: rgba(224, 224, 224, 0.8);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease 0s; }
+  .keyboard__button > * {
+    display: none; }
+  .keyboard__button_wide {
+    width: 75px; }
+  .keyboard__button_the-widest {
+    width: 325px; }
+  .keyboard__button_base-width {
+    width: 50px; }
+  .keyboard__button_wider {
+    width: 100px; }
+  .keyboard__button .current {
+    display: block; }
+  .keyboard__button .small {
+    display: none; }
+  .keyboard__button .big {
+    display: none; }
+  .keyboard__button .on {
+    display: block; }
+
 .textarea {
   margin-bottom: 20px;
   color: #333;
@@ -20,8 +60,12 @@ body {
     border: 1px solid rgba(85, 221, 255, 0.5); }
 
 .keyboard-container {
-  width: 1020px;
-  border: 1px solid black; }
+  width: 895px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.3); }
 
 .wrapper {
   width: 1200px;

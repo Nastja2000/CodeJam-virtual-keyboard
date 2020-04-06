@@ -1,0 +1,45 @@
+.keyboard__button {
+    width: $button-width;
+    height: $button-height;
+    padding: 0;
+    margin: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    font-size: 1.4rem;
+    color: $color-text;
+    border-radius: 3px;
+    border: 1px solid $color-button-border;
+    background-color: $color-button;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    &>* {
+        display: none;
+    }
+    &_wide {
+        width: $button-width * 1.5;
+    }
+    &_the-widest {
+        width: $button-width * 6.5;
+    }
+    &_base-width {
+        width: $button-width;
+    }
+    &_wider {
+        width: $button-width * 2;
+    }
+    .current {
+        display: block;
+    }
+    & .small {
+        display: none;
+    }
+    & .big {
+        display: none;
+    }
+    .on {
+        display: block;
+    }
+}

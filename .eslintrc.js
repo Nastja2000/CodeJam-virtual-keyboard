@@ -34,7 +34,7 @@ module.exports = {
         "no-param-reassign": "off",
         "no-use-before-define": "off",
 
-        "max-len": ["error", 100, 2, { ignoreUrls: true, }],
+        "max-len": ["error", 150, 2, { ignoreUrls: true, }],
         "prettier/prettier": "off",
         "no-alert": "error"
     }
