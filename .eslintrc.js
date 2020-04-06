@@ -31,9 +31,11 @@ module.exports = {
         "func-names": "off",
         "object-shorthand": "off",
         "no-unused-vars": "off",
+        "no-param-reassign": "off",
+        "no-use-before-define": "off",
 
         "max-len": ["error", 100, 2, { ignoreUrls: true, }],
-        "prettier/prettier": "error",
+        "prettier/prettier": "off",
         "no-alert": "error"
     }
 };

@@ -90,10 +90,83 @@
 /*!********************!*\
   !*** ./src/app.js ***!
   \********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-console.log('hey');
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/index */ "./src/js/index.js");
+
+
+/***/ }),
+
+/***/ "./src/js/generalFunctions.js":
+/*!************************************!*\
+  !*** ./src/js/generalFunctions.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function generateDomElement(currentNode, element) {
+  var _currentNode$classLis;
+
+  currentNode = document.createElement(element);
+
+  for (var _len = arguments.length, classes = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    classes[_key - 2] = arguments[_key];
+  }
+
+  (_currentNode$classLis = currentNode.classList).add.apply(_currentNode$classLis, classes);
+
+  return currentNode;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (generateDomElement);
+
+/***/ }),
+
+/***/ "./src/js/index.js":
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _keyboardView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./keyboardView */ "./src/js/keyboardView.js");
+// main actions  with keyboard will be there
+
+Object(_keyboardView__WEBPACK_IMPORTED_MODULE_0__["default"])();
+
+/***/ }),
+
+/***/ "./src/js/keyboardView.js":
+/*!********************************!*\
+  !*** ./src/js/keyboardView.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _generalFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generalFunctions */ "./src/js/generalFunctions.js");
+
+
+function createKeyboardView() {
+  var wrapper = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(wrapper, 'div', 'wrapper');
+  document.body.append(wrapper);
+  var textarea = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(textarea, 'textarea', 'textarea');
+  textarea.setAttribute('autofocus', 'autofocus');
+  textarea.setAttribute('cols', 100);
+  textarea.setAttribute('rows', 15);
+  var keyboardContainer = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(keyboardContainer, 'div', 'keyboard-container');
+  wrapper.append(textarea, keyboardContainer);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (createKeyboardView);
 
 /***/ }),
 
