@@ -109,7 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function generateDomElement(currentNode, element) {
+var generateDomElement = function generateDomElement(currentNode, element) {
   var _currentNode$classLis;
 
   currentNode = document.createElement(element);
@@ -121,7 +121,7 @@ function generateDomElement(currentNode, element) {
   (_currentNode$classLis = currentNode.classList).add.apply(_currentNode$classLis, classes);
 
   return currentNode;
-}
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (generateDomElement);
 
@@ -137,9 +137,77 @@ function generateDomElement(currentNode, element) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _keyboardView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./keyboardView */ "./src/js/keyboardView.js");
+/* harmony import */ var _keyboardEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./keyboardEvents */ "./src/js/keyboardEvents.js");
 // main actions  with keyboard will be there
 
+
 Object(_keyboardView__WEBPACK_IMPORTED_MODULE_0__["default"])();
+Object(_keyboardEvents__WEBPACK_IMPORTED_MODULE_1__["default"])();
+
+/***/ }),
+
+/***/ "./src/js/keyboardEvents.js":
+/*!**********************************!*\
+  !*** ./src/js/keyboardEvents.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var _this = undefined;
+
+var changeToPressed = function changeToPressed(button) {
+  var shiftLeft = document.querySelector('.ShiftLeft');
+  var shiftRight = document.querySelector('.ShiftRight');
+
+  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft')) {
+    shiftLeft.classList.toggle('keyboard__button_activate');
+    shiftRight.classList.toggle('keyboard__button_activate');
+  } else if (button.classList.contains('CapsLock')) {
+    button.classList.toggle('keyboard__button_activate');
+  } else {
+    button.classList.add('active');
+  }
+
+  return false;
+};
+
+var keyboardEvents = function keyboardEvents(key) {
+  var keyCode = ".".concat(key.code);
+  var button = document.querySelector(keyCode);
+
+  switch (key.code) {
+    case 'CapsLock':
+      changeToPressed(button);
+
+      _this.capsLockEvent(button);
+
+      break;
+
+    case 'ShiftLeft':
+    case 'ShiftRight':
+      changeToPressed(button);
+
+      _this.shiftEvent(button);
+
+      break;
+
+    case 'ArrowUp':
+    case 'ArrowRight':
+    case 'ArrowDown':
+    case 'ArrowLeft':
+      // function for cursor moving
+      break;
+
+    default:
+      changeToPressed(button); // function for writing symbols
+
+      break;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (keyboardEvents);
 
 /***/ }),
 
