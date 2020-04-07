@@ -25,9 +25,8 @@ module.exports = {
         "no-mixed-operators": "off",
         "arrow-body-style": "off",
         "function-paren-newline": "off",
-        "no-plusplus": "off",
         "space-before-function-paren": "off",
-        "no-console": "off",
+
         "func-names": "off",
         "object-shorthand": "off",
         "no-unused-vars": "off",
@@ -36,6 +35,8 @@ module.exports = {
 
         "max-len": ["error", 150, 2, { ignoreUrls: true, }],
         "prettier/prettier": "off",
-        "no-alert": "error"
+        "no-alert": "error",
+        "no-console": "error",
+        "no-plusplus": "error"
     }
 };
