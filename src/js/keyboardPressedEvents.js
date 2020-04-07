@@ -36,15 +36,15 @@ const keyboardPressedEvents = (key) => {
             break;
         default:
             changeToPressed(button);
-            // function for writing symbols
+            this.writeSymbolEvent(button);
             break;
     }
 
     this.pressedButton.add(key.code);
-    if (this.pressedButton.has('ShiftLeft') && this.pressedButton.has('AltLeft')) this.doChangeLanguage();
+    if (this.pressedButton.has('ShiftLeft') && this.pressedButton.has('AltLeft')) this.changeLanguageEvent();
     key.preventDefault();
 }
 
 
 
-export default keyboardPressedEvents;
+export default { keyboardPressedEvents, changeToPressed };

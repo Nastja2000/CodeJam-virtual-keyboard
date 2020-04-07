@@ -137,19 +137,101 @@ var generateDomElement = function generateDomElement(currentNode, element) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _keyboardView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./keyboardView */ "./src/js/keyboardView.js");
-/* harmony import */ var _keyboardEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./keyboardEvents */ "./src/js/keyboardEvents.js");
+/* harmony import */ var _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./keyboardPressedEvents */ "./src/js/keyboardPressedEvents.js");
+/* harmony import */ var _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./keyboardUnpressedEvents */ "./src/js/keyboardUnpressedEvents.js");
+/* harmony import */ var _writeSymbol__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./writeSymbol */ "./src/js/writeSymbol.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // main actions  with keyboard will be there
 
 
+
+
+
+
+
 Object(_keyboardView__WEBPACK_IMPORTED_MODULE_0__["default"])();
-Object(_keyboardEvents__WEBPACK_IMPORTED_MODULE_1__["default"])();
+
+var changeRegister = function changeRegister() {
+  document.querySelectorAll('.keyboard__button').forEach(function (button) {
+    button.childNodes.forEach(function (element) {
+      return element.childNodes.forEach(function (item) {
+        return item.classList.toggle('on');
+      });
+    });
+  });
+};
+
+var changeLanguage = function changeLanguage() {
+  var language = Object(_keyboardView__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  if (language === 'en') localStorage.setItem('language', 'ru');else localStorage.setItem('language', 'en');
+  document.querySelectorAll('.keyboard__button').forEach(function (button) {
+    return _toConsumableArray(button.children).forEach(function (item) {
+      return item.classList.toggle('current');
+    });
+  });
+};
+
+var keyboardContainer = document.querySelector('.keyboard-container');
+keyboardContainer.shiftPressed = false;
+keyboardContainer.capsLockPressed = false;
+keyboardContainer.pressedButton = new Set();
+
+keyboardContainer.shiftPressedEvent = function shiftPressedEvent(button) {
+  if (this.shiftPressed) return false;
+  this.shiftPressed = true;
+  changeRegister();
+  Object(_keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_1__["default"])(button);
+  return true;
+};
+
+keyboardContainer.shiftUnpressedEvent = function shiftUnpressedEvent(button) {
+  if (!this.shiftPressed) return false;
+  this.shiftPressed = false;
+  changeRegister();
+  Object(_keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_2__["default"])(button);
+  return true;
+};
+
+keyboardContainer.capsLockEvent = function capsLockEvent(button) {
+  if (this.capsLockPressed) return false;
+  this.capsLockPressed = true;
+  changeRegister();
+  return true;
+};
+
+keyboardContainer.changeLanguageEvent = function changeLanguageEvent() {
+  changeLanguage();
+};
+
+var textarea = document.querySelector('.textarea');
+textarea.addEventListener('keydown', _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_1__["default"].bind(keyboardContainer));
+textarea.addEventListener('keyup', _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_2__["default"].bind(keyboardContainer));
+textarea.addEventListener('blur', function () {
+  return textarea.focus();
+});
+
+keyboardContainer.writeSymbolEvent = function writeSymbolEvent(button) {
+  Object(_writeSymbol__WEBPACK_IMPORTED_MODULE_3__["default"])(button, textarea);
+  return true;
+}; // moveCursor
 
 /***/ }),
 
-/***/ "./src/js/keyboardEvents.js":
-/*!**********************************!*\
-  !*** ./src/js/keyboardEvents.js ***!
-  \**********************************/
+/***/ "./src/js/keyboardPressedEvents.js":
+/*!*****************************************!*\
+  !*** ./src/js/keyboardPressedEvents.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -173,7 +255,7 @@ var changeToPressed = function changeToPressed(button) {
   return false;
 };
 
-var keyboardEvents = function keyboardEvents(key) {
+var keyboardPressedEvents = function keyboardPressedEvents(key) {
   var keyCode = ".".concat(key.code);
   var button = document.querySelector(keyCode);
 
@@ -189,7 +271,7 @@ var keyboardEvents = function keyboardEvents(key) {
     case 'ShiftRight':
       changeToPressed(button);
 
-      _this.shiftEvent(button);
+      _this.shiftPressedEvent(button);
 
       break;
 
@@ -201,13 +283,76 @@ var keyboardEvents = function keyboardEvents(key) {
       break;
 
     default:
-      changeToPressed(button); // function for writing symbols
+      changeToPressed(button);
+
+      _this.writeSymbolEvent(button);
 
       break;
   }
+
+  _this.pressedButton.add(key.code);
+
+  if (_this.pressedButton.has('ShiftLeft') && _this.pressedButton.has('AltLeft')) _this.changeLanguageEvent();
+  key.preventDefault();
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (keyboardEvents);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  keyboardPressedEvents: keyboardPressedEvents,
+  changeToPressed: changeToPressed
+});
+
+/***/ }),
+
+/***/ "./src/js/keyboardUnpressedEvents.js":
+/*!*******************************************!*\
+  !*** ./src/js/keyboardUnpressedEvents.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var _this = undefined;
+
+var changeToUnpressed = function changeToUnpressed(button) {
+  var shiftLeft = document.querySelector('.ShiftLeft');
+  var shiftRight = document.querySelector('.ShiftRight');
+
+  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft')) {
+    shiftLeft.classList.toggle('keyboard__button_activate');
+    shiftRight.classList.toggle('keyboard__button_activate');
+  } else if (button.classList.contains('CapsLock')) {
+    button.classList.toggle('keyboard__button_activate');
+  } else {
+    button.classList.remove('active'); // SetTimeout ?
+  }
+
+  return false;
+};
+
+var keyboardUnpressedEvents = function keyboardUnpressedEvents(key) {
+  var keyCode = ".".concat(key.code);
+  var button = document.querySelector(keyCode);
+
+  switch (key.code) {
+    case 'ShiftLeft':
+    case 'ShiftRight':
+      _this.shiftUnpressedEvent(button);
+
+      break;
+
+    default:
+      changeToUnpressed(button);
+      break;
+  }
+
+  _this.pressedButton["delete"](key.code);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  changeToUnpressed: changeToUnpressed,
+  keyboardUnpressedEvents: keyboardUnpressedEvents
+});
 
 /***/ }),
 
@@ -305,7 +450,99 @@ var createKeyboardView = function createKeyboardView() {
   wrapper.append(textarea, keyboardContainer);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (createKeyboardView);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  createKeyboardView: createKeyboardView,
+  getLocalLanguage: getLocalLanguage
+});
+
+/***/ }),
+
+/***/ "./src/js/writeSymbol.js":
+/*!*******************************!*\
+  !*** ./src/js/writeSymbol.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var writeSymbol = function writeSymbol(button, textarea) {
+  var inputArea = textarea;
+  var currentSymbol = '';
+  var codeOfButton = '';
+  var valueOfSymbol = '';
+
+  var _filter = _toConsumableArray(button.children).filter(function (element) {
+    return element.matches('.current');
+  });
+
+  var _filter2 = _slicedToArray(_filter, 1);
+
+  currentSymbol = _filter2[0];
+
+  var _button$classList = _slicedToArray(button.classList, 2);
+
+  codeOfButton = _button$classList[1];
+  valueOfSymbol = currentSymbol.innerText;
+
+  switch (codeOfButton) {
+    case 'Space':
+      inputArea.setRangeText(' ', inputArea.selectionStart, inputArea.selectionEnd, 'end');
+      break;
+
+    case 'Tab':
+      inputArea.setRangeText('\t', inputArea.selectionStart, inputArea.selectionEnd, 'end');
+      break;
+
+    case 'Backspace':
+      if (inputArea.value === 0) inputArea.setRangeText('', inputArea.selectionStart, inputArea.selectionEnd, 'end');else if (inputArea.value > 0) inputArea.setRangeText('', inputArea.selectionStart - 1, inputArea.selectionEnd, 'end');
+      break;
+
+    case 'Enter':
+      inputArea.setRangeText('\n', inputArea.selectionStart, inputArea.selectionEnd, 'end');
+      break;
+
+    case 'ShiftLeft':
+    case 'ShiftRight':
+    case 'ControlLeft':
+    case 'ControlRight':
+    case 'AltLeft':
+    case 'AltRight':
+    case 'OSLeft':
+    case 'ArrowLeft':
+    case 'ArrowRight':
+    case 'ArrowUp':
+    case 'ArrowDown':
+      inputArea.value += '';
+      break;
+
+    default:
+      inputArea.setRangeText(valueOfSymbol, inputArea.selectionStart, inputArea.selectionEnd, 'end');
+      break;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (writeSymbol);
 
 /***/ }),
 

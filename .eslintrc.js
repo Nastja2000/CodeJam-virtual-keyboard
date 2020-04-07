@@ -33,6 +33,7 @@ module.exports = {
         "no-unused-vars": "off",
         "no-param-reassign": "off",
         "no-use-before-define": "off",
+        "import/no-duplicates": "off",
 
         "max-len": ["error", 150, 2, { ignoreUrls: true, }],
         "prettier/prettier": "off",

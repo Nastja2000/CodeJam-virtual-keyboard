@@ -30,4 +30,4 @@ const keyboardUnpressedEvents = (key) => {
     this.pressedButton.delete(key.code);
 }
 
-export default keyboardUnpressedEvents;
+export default { changeToUnpressed, keyboardUnpressedEvents };

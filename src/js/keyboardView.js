@@ -153,4 +153,4 @@ const createKeyboardView = () => {
     wrapper.append(textarea, keyboardContainer);
 }
 
-export default createKeyboardView;
+export default { createKeyboardView, getLocalLanguage };
