@@ -11,7 +11,6 @@ function keyboardPressedEvents(key) {
             break;
         case 'ShiftLeft':
         case 'ShiftRight':
-            changeToPressed(button);
             this.shiftPressedEvent(button);
             break;
 

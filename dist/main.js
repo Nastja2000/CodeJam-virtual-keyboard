@@ -125,12 +125,12 @@ var buttonsLayout = [[['Backquote', 'ё', 'Ё', '`', '~'], ['Digit1', '1', '!', 
 __webpack_require__.r(__webpack_exports__);
 function changeToPressed(button) {
   var forceShiftToggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var shiftLeft = document.querySelector('.ShiftLeft');
-  var shiftRight = document.querySelector('.ShiftRight');
 
+  /*  const shiftLeft = document.querySelector('.ShiftLeft');
+   const shiftRight = document.querySelector('.ShiftRight'); */
   if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftRight') || forceShiftToggle) {
-    shiftLeft.classList.toggle('keyboard__button_activate');
-    shiftRight.classList.toggle('keyboard__button_activate');
+    document.querySelector('.ShiftLeft').classList.toggle('keyboard__button_activate');
+    document.querySelector('.ShiftRight').classList.toggle('keyboard__button_activate');
   } else if (button.classList.contains('CapsLock')) {
     button.classList.toggle('keyboard__button_activate');
   } else {
@@ -155,12 +155,12 @@ function changeToPressed(button) {
 __webpack_require__.r(__webpack_exports__);
 function changeToUnpressed(button) {
   var forceShiftToggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var shiftLeft = document.querySelector('.ShiftLeft');
-  var shiftRight = document.querySelector('.ShiftRight');
 
-  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft') || forceShiftToggle) {
-    shiftLeft.classList.toggle('keyboard__button_activate');
-    shiftRight.classList.toggle('keyboard__button_activate');
+  /*  const shiftLeft = document.querySelector('.ShiftLeft');
+   const shiftRight = document.querySelector('.ShiftRight'); */
+  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftRight') || forceShiftToggle) {
+    document.querySelector('.ShiftLeft').classList.toggle('keyboard__button_activate');
+    document.querySelector('.ShiftRight').classList.toggle('keyboard__button_activate');
   } else if (button.classList.contains('CapsLock')) {
     button.classList.toggle('keyboard__button_activate');
   } else {
@@ -362,7 +362,6 @@ function keyboardPressedEvents(key) {
 
     case 'ShiftLeft':
     case 'ShiftRight':
-      Object(_changeToPressed__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
       this.shiftPressedEvent(button);
       break;
 
