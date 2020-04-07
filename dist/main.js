@@ -164,7 +164,9 @@ function changeToUnpressed(button) {
   } else if (button.classList.contains('CapsLock')) {
     button.classList.toggle('keyboard__button_activate');
   } else {
-    button.classList.remove('active');
+    setTimeout(function () {
+      button.classList.remove('active');
+    }, 250);
   }
 
   return false;

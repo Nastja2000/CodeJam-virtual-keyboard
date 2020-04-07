@@ -8,9 +8,9 @@ function changeToUnpressed(button, forceShiftToggle = false) {
     } else if (button.classList.contains('CapsLock')) {
         button.classList.toggle('keyboard__button_activate');
     } else {
-
-        button.classList.remove('active');
-
+        setTimeout(() => {
+            button.classList.remove('active');
+        }, 250);
     }
     return false;
 }
