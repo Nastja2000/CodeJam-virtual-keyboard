@@ -7,7 +7,7 @@ function keyboardPressedEvents(key) {
     switch (key.code) {
         case 'CapsLock':
             changeToPressed(button);
-            this.capsLockEvent(button);
+            this.capsLockEvent();
             break;
         case 'ShiftLeft':
         case 'ShiftRight':

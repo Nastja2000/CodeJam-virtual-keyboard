@@ -265,10 +265,24 @@ Object(_keyboardView__WEBPACK_IMPORTED_MODULE_0__["default"])();
 var changeRegister = function changeRegister() {
   document.querySelectorAll('.keyboard__button').forEach(function (button) {
     button.childNodes.forEach(function (element) {
-      return element.childNodes.forEach(function (item) {
+      console.log(element);
+      element.childNodes.forEach(function (item) {
         return item.classList.toggle('on');
       });
     });
+  });
+};
+
+var changeRegisterByCapsLock = function changeRegisterByCapsLock() {
+  document.querySelectorAll('.keyboard__button').forEach(function (button) {
+    if (!button.matches('.Digit0') && !button.matches('.Digit1') && !button.matches('.Digit2') && !button.matches('.Digit3') && !button.matches('.Digit4') && !button.matches('.Digit5') && !button.matches('.Digit6') && !button.matches('.Digit7') && !button.matches('.Digit8') && !button.matches('.Digit9') && !button.matches('.Digit-') && !button.classList.contains('Equal=') && !button.matches('.Backslash') && !button.matches('.Slash')) {
+      button.childNodes.forEach(function (element) {
+        console.log(element);
+        element.childNodes.forEach(function (item) {
+          return item.classList.toggle('on');
+        });
+      });
+    }
   });
 };
 
@@ -303,10 +317,9 @@ keyboardContainer.shiftUnpressedEvent = function shiftUnpressedEvent(button) {
   return true;
 };
 
-keyboardContainer.capsLockEvent = function capsLockEvent(button) {
-  if (this.capsLockPressed) return false;
-  this.capsLockPressed = true;
-  changeRegister();
+keyboardContainer.capsLockEvent = function capsLockEvent() {
+  this.capsLockPressed = !this.capsLockPressed;
+  changeRegisterByCapsLock();
   return true;
 };
 
@@ -357,7 +370,7 @@ function keyboardPressedEvents(key) {
   switch (key.code) {
     case 'CapsLock':
       Object(_changeToPressed__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
-      this.capsLockEvent(button);
+      this.capsLockEvent();
       break;
 
     case 'ShiftLeft':

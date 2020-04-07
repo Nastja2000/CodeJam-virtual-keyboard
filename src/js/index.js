@@ -13,8 +13,32 @@ import moveCursor from './moveCursor';
 createKeyboardView();
 
 const changeRegister = () => {
+
     document.querySelectorAll('.keyboard__button').forEach((button) => {
-        button.childNodes.forEach((element) => element.childNodes.forEach((item) => item.classList.toggle('on')));
+        button.childNodes.forEach((element) => {
+            console.log(element);
+            element.childNodes.forEach((item) => item.classList.toggle('on'))
+        });
+
+    });
+};
+
+
+const changeRegisterByCapsLock = () => {
+
+    document.querySelectorAll('.keyboard__button').forEach((button) => {
+        if (!button.matches('.Digit0') && !button.matches('.Digit1') &&
+            !button.matches('.Digit2') && !button.matches('.Digit3') &&
+            !button.matches('.Digit4') && !button.matches('.Digit5') &&
+            !button.matches('.Digit6') && !button.matches('.Digit7') &&
+            !button.matches('.Digit8') && !button.matches('.Digit9') &&
+            !button.matches('.Digit-') && !button.classList.contains('Equal=') &&
+            !button.matches('.Backslash') && !button.matches('.Slash')) {
+            button.childNodes.forEach((element) => {
+                console.log(element);
+                element.childNodes.forEach((item) => item.classList.toggle('on'))
+            });
+        }
     });
 };
 
@@ -47,10 +71,9 @@ keyboardContainer.shiftUnpressedEvent = function shiftUnpressedEvent(button) {
     return true;
 };
 
-keyboardContainer.capsLockEvent = function capsLockEvent(button) {
-    if (this.capsLockPressed) return false;
-    this.capsLockPressed = true;
-    changeRegister();
+keyboardContainer.capsLockEvent = function capsLockEvent() {
+    this.capsLockPressed = !this.capsLockPressed;
+    changeRegisterByCapsLock();
     return true;
 };
 
