@@ -15,8 +15,9 @@ function writeSymbol(button, textarea) {
             inputArea.setRangeText('\t', inputArea.selectionStart, inputArea.selectionEnd, 'end');
             break;
         case 'Backspace':
-            if (inputArea.value === 0) inputArea.setRangeText('', inputArea.selectionStart, inputArea.selectionEnd, 'end');
-            else if (inputArea.value > 0) inputArea.setRangeText('', inputArea.selectionStart - 1, inputArea.selectionEnd, 'end');
+            if (inputArea.selectionStart > 0) inputArea.setRangeText('', inputArea.selectionStart - 1, inputArea.selectionEnd, 'end');
+            if (inputArea.selectionStart === 0) inputArea.setRangeText('', inputArea.selectionStart, inputArea.selectionEnd, 'end');
+
             break;
         case 'Enter':
             inputArea.setRangeText('\n', inputArea.selectionStart, inputArea.selectionEnd, 'end');
