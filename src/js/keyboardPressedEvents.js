@@ -1,4 +1,5 @@
 import changeToPressed from './changeToPressed';
+import changeToUnpressed from './changeToUnpressed';
 
 function keyboardPressedEvents(key) {
     const keyCode = `.${key.code}`;
@@ -18,6 +19,8 @@ function keyboardPressedEvents(key) {
         case 'ArrowRight':
         case 'ArrowDown':
         case 'ArrowLeft':
+            changeToPressed(button);
+            changeToUnpressed(button);
             this.moveCursorEvent(button);
             break;
         default:
@@ -30,7 +33,5 @@ function keyboardPressedEvents(key) {
     if (this.pressedButton.has('ShiftLeft') && this.pressedButton.has('AltLeft')) this.changeLanguageEvent();
     key.preventDefault();
 }
-
-
 
 export default keyboardPressedEvents;

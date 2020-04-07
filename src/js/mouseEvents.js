@@ -2,8 +2,10 @@ import changeToPressed from './changeToPressed';
 import changeToUnpressed from './changeToUnpressed';
 
 function mouseEvents(event) {
+    // const textarea = document.querySelector('.textarea');
     let button = event.target;
     let codeOfButton = '';
+
 
     if (event.target.classList.contains('keyboard__button')) button = event.target;
     else if (event.target.classList.contains('on')) button = event.target.parentNode.parentNode;
@@ -16,7 +18,7 @@ function mouseEvents(event) {
         case 'ShiftRight':
             this.shiftPressedByMouse = true;
             if (!this.shiftPressed) this.shiftPressedEvent(button);
-            this.shiftUnpressedEvent(button);
+            else this.shiftUnpressedEvent(button);
             break;
         case 'CapsLock':
             changeToPressed(button);
@@ -27,14 +29,17 @@ function mouseEvents(event) {
         case 'ArrowDown':
         case 'ArrowLeft':
             this.moveCursorEvent(button);
+            changeToPressed(button);
+            changeToUnpressed(button);
             break;
         default:
             changeToPressed(button);
             changeToUnpressed(button);
             this.writeSymbolEvent(button);
-            if (!this.shiftPressed) this.shiftUnpressedEvent(button);
+            if (this.shiftPressed) this.shiftUnpressedEvent(button);
             break;
     }
+
     return true;
 }
 

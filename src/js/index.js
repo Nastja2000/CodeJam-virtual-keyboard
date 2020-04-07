@@ -49,11 +49,22 @@ const changeLanguage = () => {
     document.querySelectorAll('.keyboard__button').forEach((button) => [...button.children].forEach((item) => item.classList.toggle('current')));
 };
 
+
+
 const keyboardContainer = document.querySelector('.keyboard-container');
 keyboardContainer.shiftPressed = false;
 keyboardContainer.capsLockPressed = false;
+keyboardContainer.shiftPressedByMouse = false;
 keyboardContainer.pressedButton = new Set();
 
+const textarea = document.querySelector('.textarea');
+textarea.addEventListener('keydown', keyboardPressedEvents.bind(keyboardContainer));
+textarea.addEventListener('keyup', keyboardUnpressedEvents.bind(keyboardContainer));
+textarea.addEventListener('blur', () => textarea.focus());
+
+keyboardContainer.changeLanguageEvent = function changeLanguageEvent() {
+    changeLanguage();
+};
 
 keyboardContainer.shiftPressedEvent = function shiftPressedEvent(button) {
     if (this.shiftPressed) return false;
@@ -63,11 +74,12 @@ keyboardContainer.shiftPressedEvent = function shiftPressedEvent(button) {
     return true;
 };
 
-keyboardContainer.shiftUnpressedEvent = function shiftUnpressedEvent(button) {
+keyboardContainer.shiftUnpressedEvent = function shiftUnpressedEvent(button, forceShiftToggle = false) {
     if (!this.shiftPressed) return false;
     this.shiftPressed = false;
+    this.shiftPressedByMouse = false;
     changeRegister();
-    changeToUnpressed(button);
+    changeToPressed(button, forceShiftToggle);
     return true;
 };
 
@@ -76,15 +88,6 @@ keyboardContainer.capsLockEvent = function capsLockEvent() {
     changeRegisterByCapsLock();
     return true;
 };
-
-keyboardContainer.changeLanguageEvent = function changeLanguageEvent() {
-    changeLanguage();
-};
-
-const textarea = document.querySelector('.textarea');
-textarea.addEventListener('keydown', keyboardPressedEvents.bind(keyboardContainer));
-textarea.addEventListener('keyup', keyboardUnpressedEvents.bind(keyboardContainer));
-textarea.addEventListener('blur', () => textarea.focus());
 
 keyboardContainer.addEventListener('mousedown', mouseEvents.bind(keyboardContainer));
 
