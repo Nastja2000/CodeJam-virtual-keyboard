@@ -100,6 +100,80 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/buttonsLayout.js":
+/*!*********************************!*\
+  !*** ./src/js/buttonsLayout.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var buttonsLayout = [[['Backquote', 'ё', 'Ё', '`', '~'], ['Digit1', '1', '!', '1', '!'], ['Digit2', '2', '"', '2', '@'], ['Digit3', '3', '№', '3', '#'], ['Digit4', '4', ';', '4', '$'], ['Digit5', '5', '%', '5', '%'], ['Digit6', '6', ':', '6', '^'], ['Digit7', '7', '?', '7', '&'], ['Digit8', '8', '*', '8', '*'], ['Digit9', '9', '(', '9', '('], ['Digit0', '0', ')', '0', ')'], ['Digit-', '-', '_', '-', '_'], ['Equal=', '=', '+', '=', '+'], ['Backspace', 'Backspace', 'Backspace', 'Backspace', 'Backspace']], [['Tab', 'Tab', 'Tab', 'Tab', 'Tab'], ['KeyQ', 'й', 'Й', 'q', 'Q'], ['KeyW', 'ц', 'Ц', 'w', 'W'], ['KeyE', 'у', 'У', 'e', 'E'], ['KeyR', 'к', 'К', 'r', 'R'], ['KeyT', 'е', 'Е', 't', 'T'], ['KeyY', 'н', 'Н', 'y', 'Y'], ['KeyU', 'г', 'Г', 'u', 'U'], ['KeyI', 'ш', 'Ш', 'i', 'I'], ['KeyO', 'щ', 'Щ', 'o', 'O'], ['KeyP', 'з', 'З', 'p', 'P'], ['BracketLeft', 'х', 'Х', '[', '{'], ['BracketRight', 'ъ', 'Ъ', ']', '}'], ['Backslash', '\\', '/', '\\', '|']], [['CapsLock', 'CapsLock', 'CapsLock', 'CapsLock', 'CapsLock'], ['KeyA', 'ф', 'Ф', 'a', 'A'], ['KeyS', 'ы', 'Ы', 's', 'S'], ['KeyD', 'в', 'В', 'd', 'D'], ['KeyF', 'а', 'А', 'f', 'F'], ['KeyG', 'п', 'П', 'g', 'G'], ['KeyH', 'р', 'Р', 'h', 'H'], ['KeyJ', 'о', 'О', 'j', 'J'], ['KeyK', 'л', 'Л', 'k', 'K'], ['KeyL', 'д', 'Д', 'l', 'L'], ['Semicolon', 'ж', 'Ж', ';', ':'], ['Quote', 'э', 'Э', '\'', '"'], ['Enter', 'Enter', 'Enter', 'Enter', 'Enter']], [['ShiftLeft', 'Shift', 'Shift', 'Shift', 'Shift'], ['KeyZ', 'я', 'Я', 'z', 'Z'], ['KeyX', 'ч', 'Ч', 'x', 'X'], ['KeyC', 'с', 'С', 'c', 'C'], ['KeyV', 'м', 'М', 'v', 'V'], ['KeyB', 'и', 'И', 'b', 'B'], ['KeyN', 'т', 'Т', 'n', 'N'], ['KeyM', 'ь', 'Ь', 'm', 'M'], ['Comma', 'б', 'Б', ',', '<'], ['Period', 'ю', 'Ю', '.', '>'], ['Slash', '.', ',', '/', '?'], ['ArrowUp', String.fromCharCode(8593), String.fromCharCode(8593), String.fromCharCode(8593), String.fromCharCode(8593)], ['ShiftRight', 'Shift', 'Shift', 'Shift', 'Shift']], [['ControlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['OSLeft', 'Win', 'Win', 'Win', 'Win'], ['AltLeft', 'Alt', 'Alt', 'Alt', 'Alt'], ['Space', 'Space', 'Space', 'Space', 'Space'], ['AltRight', 'Alt', 'Alt', 'Alt', 'Alt'], ['ControlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['ArrowLeft', String.fromCharCode(8592), String.fromCharCode(8592), String.fromCharCode(8592), String.fromCharCode(8592)], ['ArrowDown', String.fromCharCode(8595), String.fromCharCode(8595), String.fromCharCode(8595), String.fromCharCode(8595)], ['ArrowRight', String.fromCharCode(8594), String.fromCharCode(8594), String.fromCharCode(8594), String.fromCharCode(8594)]]];
+/* harmony default export */ __webpack_exports__["default"] = (buttonsLayout);
+
+/***/ }),
+
+/***/ "./src/js/changeToPressed.js":
+/*!***********************************!*\
+  !*** ./src/js/changeToPressed.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function changeToPressed(button) {
+  var forceShiftToggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var shiftLeft = document.querySelector('.ShiftLeft');
+  var shiftRight = document.querySelector('.ShiftRight');
+
+  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftRight') || forceShiftToggle) {
+    shiftLeft.classList.toggle('keyboard__button_activate');
+    shiftRight.classList.toggle('keyboard__button_activate');
+  } else if (button.classList.contains('CapsLock')) {
+    button.classList.toggle('keyboard__button_activate');
+  } else {
+    button.classList.add('active');
+  }
+
+  return false;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (changeToPressed);
+
+/***/ }),
+
+/***/ "./src/js/changeToUnpressed.js":
+/*!*************************************!*\
+  !*** ./src/js/changeToUnpressed.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function changeToUnpressed(button) {
+  var forceShiftToggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var shiftLeft = document.querySelector('.ShiftLeft');
+  var shiftRight = document.querySelector('.ShiftRight');
+
+  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft') || forceShiftToggle) {
+    shiftLeft.classList.toggle('keyboard__button_activate');
+    shiftRight.classList.toggle('keyboard__button_activate');
+  } else if (button.classList.contains('CapsLock')) {
+    button.classList.toggle('keyboard__button_activate');
+  } else {
+    button.classList.remove('active');
+  }
+
+  return false;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (changeToUnpressed);
+
+/***/ }),
+
 /***/ "./src/js/generalFunctions.js":
 /*!************************************!*\
   !*** ./src/js/generalFunctions.js ***!
@@ -127,6 +201,23 @@ function generateDomElement(currentNode, element) {
 
 /***/ }),
 
+/***/ "./src/js/getLocalLanguage.js":
+/*!************************************!*\
+  !*** ./src/js/getLocalLanguage.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function getLocalLanguage() {
+  return localStorage.getItem('language') || 'en';
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (getLocalLanguage);
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
@@ -137,11 +228,14 @@ function generateDomElement(currentNode, element) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _keyboardView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./keyboardView */ "./src/js/keyboardView.js");
-/* harmony import */ var _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./keyboardPressedEvents */ "./src/js/keyboardPressedEvents.js");
-/* harmony import */ var _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./keyboardUnpressedEvents */ "./src/js/keyboardUnpressedEvents.js");
-/* harmony import */ var _writeSymbol__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./writeSymbol */ "./src/js/writeSymbol.js");
-/* harmony import */ var _mouseEvents__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mouseEvents */ "./src/js/mouseEvents.js");
-/* harmony import */ var _moveCursor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./moveCursor */ "./src/js/moveCursor.js");
+/* harmony import */ var _getLocalLanguage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getLocalLanguage */ "./src/js/getLocalLanguage.js");
+/* harmony import */ var _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./keyboardPressedEvents */ "./src/js/keyboardPressedEvents.js");
+/* harmony import */ var _changeToPressed__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./changeToPressed */ "./src/js/changeToPressed.js");
+/* harmony import */ var _changeToUnpressed__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./changeToUnpressed */ "./src/js/changeToUnpressed.js");
+/* harmony import */ var _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./keyboardUnpressedEvents */ "./src/js/keyboardUnpressedEvents.js");
+/* harmony import */ var _writeSymbol__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./writeSymbol */ "./src/js/writeSymbol.js");
+/* harmony import */ var _mouseEvents__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mouseEvents */ "./src/js/mouseEvents.js");
+/* harmony import */ var _moveCursor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./moveCursor */ "./src/js/moveCursor.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -177,7 +271,7 @@ var changeRegister = function changeRegister() {
 };
 
 var changeLanguage = function changeLanguage() {
-  var language = Object(_keyboardView__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  var language = Object(_getLocalLanguage__WEBPACK_IMPORTED_MODULE_1__["default"])();
   if (language === 'en') localStorage.setItem('language', 'ru');else localStorage.setItem('language', 'en');
   document.querySelectorAll('.keyboard__button').forEach(function (button) {
     return _toConsumableArray(button.children).forEach(function (item) {
@@ -195,7 +289,7 @@ keyboardContainer.shiftPressedEvent = function shiftPressedEvent(button) {
   if (this.shiftPressed) return false;
   this.shiftPressed = true;
   changeRegister();
-  Object(_keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_1__["default"])(button);
+  Object(_changeToPressed__WEBPACK_IMPORTED_MODULE_3__["default"])(button);
   return true;
 };
 
@@ -203,7 +297,7 @@ keyboardContainer.shiftUnpressedEvent = function shiftUnpressedEvent(button) {
   if (!this.shiftPressed) return false;
   this.shiftPressed = false;
   changeRegister();
-  Object(_keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_2__["default"])(button);
+  Object(_changeToUnpressed__WEBPACK_IMPORTED_MODULE_4__["default"])(button);
   return true;
 };
 
@@ -219,15 +313,15 @@ keyboardContainer.changeLanguageEvent = function changeLanguageEvent() {
 };
 
 var textarea = document.querySelector('.textarea');
-textarea.addEventListener('keydown', _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_1__["default"].bind(keyboardContainer));
-textarea.addEventListener('keyup', _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_2__["default"].bind(keyboardContainer));
+textarea.addEventListener('keydown', _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_2__["default"].bind(keyboardContainer));
+textarea.addEventListener('keyup', _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_5__["default"].bind(keyboardContainer));
 textarea.addEventListener('blur', function () {
   return textarea.focus();
 });
-keyboardContainer.addEventListener('mousedown', _mouseEvents__WEBPACK_IMPORTED_MODULE_4__["default"].bind(keyboardContainer));
+keyboardContainer.addEventListener('mousedown', _mouseEvents__WEBPACK_IMPORTED_MODULE_7__["default"].bind(keyboardContainer));
 
 keyboardContainer.writeSymbolEvent = function writeSymbolEvent(button) {
-  Object(_writeSymbol__WEBPACK_IMPORTED_MODULE_3__["default"])(button, textarea);
+  Object(_writeSymbol__WEBPACK_IMPORTED_MODULE_6__["default"])(button, textarea);
 
   if (this.shiftPressedByMouse) {
     this.shiftUnpressedEvent(button, true);
@@ -237,7 +331,7 @@ keyboardContainer.writeSymbolEvent = function writeSymbolEvent(button) {
 };
 
 keyboardContainer.moveCursorEvent = function moveCursorEvent(button) {
-  Object(_moveCursor__WEBPACK_IMPORTED_MODULE_5__["default"])(button);
+  Object(_moveCursor__WEBPACK_IMPORTED_MODULE_8__["default"])(button);
 };
 
 /***/ }),
@@ -251,22 +345,8 @@ keyboardContainer.moveCursorEvent = function moveCursorEvent(button) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function changeToPressed(button) {
-  var forceShiftToggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var shiftLeft = document.querySelector('.ShiftLeft');
-  var shiftRight = document.querySelector('.ShiftRight');
+/* harmony import */ var _changeToPressed__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./changeToPressed */ "./src/js/changeToPressed.js");
 
-  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft') || forceShiftToggle) {
-    shiftLeft.classList.toggle('keyboard__button_activate');
-    shiftRight.classList.toggle('keyboard__button_activate');
-  } else if (button.classList.contains('CapsLock')) {
-    button.classList.toggle('keyboard__button_activate');
-  } else {
-    button.classList.add('active');
-  }
-
-  return false;
-}
 
 function keyboardPressedEvents(key) {
   var keyCode = ".".concat(key.code);
@@ -274,13 +354,13 @@ function keyboardPressedEvents(key) {
 
   switch (key.code) {
     case 'CapsLock':
-      changeToPressed(button);
+      Object(_changeToPressed__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
       this.capsLockEvent(button);
       break;
 
     case 'ShiftLeft':
     case 'ShiftRight':
-      changeToPressed(button);
+      Object(_changeToPressed__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
       this.shiftPressedEvent(button);
       break;
 
@@ -292,7 +372,7 @@ function keyboardPressedEvents(key) {
       break;
 
     default:
-      changeToPressed(button);
+      Object(_changeToPressed__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
       this.writeSymbolEvent(button);
       break;
   }
@@ -302,10 +382,7 @@ function keyboardPressedEvents(key) {
   key.preventDefault();
 }
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  keyboardPressedEvents: keyboardPressedEvents,
-  changeToPressed: changeToPressed
-});
+/* harmony default export */ __webpack_exports__["default"] = (keyboardPressedEvents);
 
 /***/ }),
 
@@ -318,22 +395,8 @@ function keyboardPressedEvents(key) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function changeToUnpressed(button) {
-  var forceShiftToggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var shiftLeft = document.querySelector('.ShiftLeft');
-  var shiftRight = document.querySelector('.ShiftRight');
+/* harmony import */ var _changeToUnpressed__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./changeToUnpressed */ "./src/js/changeToUnpressed.js");
 
-  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft') || forceShiftToggle) {
-    shiftLeft.classList.toggle('keyboard__button_activate');
-    shiftRight.classList.toggle('keyboard__button_activate');
-  } else if (button.classList.contains('CapsLock')) {
-    button.classList.toggle('keyboard__button_activate');
-  } else {
-    button.classList.remove('active'); // SetTimeout ?
-  }
-
-  return false;
-}
 
 function keyboardUnpressedEvents(key) {
   var keyCode = ".".concat(key.code);
@@ -346,17 +409,14 @@ function keyboardUnpressedEvents(key) {
       break;
 
     default:
-      changeToUnpressed(button);
+      Object(_changeToUnpressed__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
       break;
   }
 
   this.pressedButton["delete"](key.code);
 }
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  changeToUnpressed: changeToUnpressed,
-  keyboardUnpressedEvents: keyboardUnpressedEvents
-});
+/* harmony default export */ __webpack_exports__["default"] = (keyboardUnpressedEvents);
 
 /***/ }),
 
@@ -370,6 +430,8 @@ function keyboardUnpressedEvents(key) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _generalFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generalFunctions */ "./src/js/generalFunctions.js");
+/* harmony import */ var _buttonsLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./buttonsLayout */ "./src/js/buttonsLayout.js");
+/* harmony import */ var _getLocalLanguage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getLocalLanguage */ "./src/js/getLocalLanguage.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -383,11 +445,8 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-var buttonsLayout = [[['Backquote', 'ё', 'Ё', '`', '~'], ['Digit1', '1', '!', '1', '!'], ['Digit2', '2', '"', '2', '@'], ['Digit3', '3', '№', '3', '#'], ['Digit4', '4', ';', '4', '$'], ['Digit5', '5', '%', '5', '%'], ['Digit6', '6', ':', '6', '^'], ['Digit7', '7', '?', '7', '&'], ['Digit8', '8', '*', '8', '*'], ['Digit9', '9', '(', '9', '('], ['Digit0', '0', ')', '0', ')'], ['Digit-', '-', '_', '-', '_'], ['Equal=', '=', '+', '=', '+'], ['Backspace', 'Backspace', 'Backspace', 'Backspace', 'Backspace']], [['Tab', 'Tab', 'Tab', 'Tab', 'Tab'], ['KeyQ', 'й', 'Й', 'q', 'Q'], ['KeyW', 'ц', 'Ц', 'w', 'W'], ['KeyE', 'у', 'У', 'e', 'E'], ['KeyR', 'к', 'К', 'r', 'R'], ['KeyT', 'е', 'Е', 't', 'T'], ['KeyY', 'н', 'Н', 'y', 'Y'], ['KeyU', 'г', 'Г', 'u', 'U'], ['KeyI', 'ш', 'Ш', 'i', 'I'], ['KeyO', 'щ', 'Щ', 'o', 'O'], ['KeyP', 'з', 'З', 'p', 'P'], ['BracketLeft', 'х', 'Х', '[', '{'], ['BracketRight', 'ъ', 'Ъ', ']', '}'], ['Backslash', '\\', '/', '\\', '|']], [['CapsLock', 'CapsLock', 'CapsLock', 'CapsLock', 'CapsLock'], ['KeyA', 'ф', 'Ф', 'a', 'A'], ['KeyS', 'ы', 'Ы', 's', 'S'], ['KeyD', 'в', 'В', 'd', 'D'], ['KeyF', 'а', 'А', 'f', 'F'], ['KeyG', 'п', 'П', 'g', 'G'], ['KeyH', 'р', 'Р', 'h', 'H'], ['KeyJ', 'о', 'О', 'j', 'J'], ['KeyK', 'л', 'Л', 'k', 'K'], ['KeyL', 'д', 'Д', 'l', 'L'], ['Semicolon', 'ж', 'Ж', ';', ':'], ['Quote', 'э', 'Э', '\'', '"'], ['Enter', 'Enter', 'Enter', 'Enter', 'Enter']], [['ShiftLeft', 'Shift', 'Shift', 'Shift', 'Shift'], ['KeyZ', 'я', 'Я', 'z', 'Z'], ['KeyX', 'ч', 'Ч', 'x', 'X'], ['KeyC', 'с', 'С', 'c', 'C'], ['KeyV', 'м', 'М', 'v', 'V'], ['KeyB', 'и', 'И', 'b', 'B'], ['KeyN', 'т', 'Т', 'n', 'N'], ['KeyM', 'ь', 'Ь', 'm', 'M'], ['Comma', 'б', 'Б', ',', '<'], ['Period', 'ю', 'Ю', '.', '>'], ['Slash', '.', ',', '/', '?'], ['ArrowUp', String.fromCharCode(8593), String.fromCharCode(8593), String.fromCharCode(8593), String.fromCharCode(8593)], ['ShiftRight', 'Shift', 'Shift', 'Shift', 'Shift']], [['ControlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['OSLeft', 'Win', 'Win', 'Win', 'Win'], ['AltLeft', 'Alt', 'Alt', 'Alt', 'Alt'], ['Space', 'Space', 'Space', 'Space', 'Space'], ['AltRight', 'Alt', 'Alt', 'Alt', 'Alt'], ['ControlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['ArrowLeft', String.fromCharCode(8592), String.fromCharCode(8592), String.fromCharCode(8592), String.fromCharCode(8592)], ['ArrowDown', String.fromCharCode(8595), String.fromCharCode(8595), String.fromCharCode(8595), String.fromCharCode(8595)], ['ArrowRight', String.fromCharCode(8594), String.fromCharCode(8594), String.fromCharCode(8594), String.fromCharCode(8594)]]];
 
-function getLocalLanguage() {
-  return localStorage.getItem('language') || 'en';
-}
+
 
 function createKeyboardView() {
   var wrapper = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(wrapper, 'div', 'wrapper');
@@ -397,7 +456,7 @@ function createKeyboardView() {
   textarea.setAttribute('cols', 100);
   textarea.setAttribute('rows', 15);
   var keyboardContainer = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(keyboardContainer, 'div', 'keyboard-container');
-  buttonsLayout.forEach(function (row) {
+  _buttonsLayout__WEBPACK_IMPORTED_MODULE_1__["default"].forEach(function (row) {
     row.forEach(function (element) {
       var button = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(button, 'button');
 
@@ -435,7 +494,7 @@ function createKeyboardView() {
       keyboardContainer.append(button);
       var ruLang = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'ru');
       var enLang = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'en');
-      var language = getLocalLanguage();
+      var language = Object(_getLocalLanguage__WEBPACK_IMPORTED_MODULE_2__["default"])();
       if (language === 'en') enLang.classList.add('current');else ruLang.classList.add('current');
       button.append(ruLang, enLang);
       var ruLowerCase = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(ruLang, 'span', 'small', 'on');
@@ -454,10 +513,7 @@ function createKeyboardView() {
   wrapper.append(textarea, keyboardContainer);
 }
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  createKeyboardView: createKeyboardView,
-  getLocalLanguage: getLocalLanguage
-});
+/* harmony default export */ __webpack_exports__["default"] = (createKeyboardView);
 
 /***/ }),
 
@@ -470,8 +526,8 @@ function createKeyboardView() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./keyboardPressedEvents */ "./src/js/keyboardPressedEvents.js");
-/* harmony import */ var _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./keyboardUnpressedEvents */ "./src/js/keyboardUnpressedEvents.js");
+/* harmony import */ var _changeToPressed__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./changeToPressed */ "./src/js/changeToPressed.js");
+/* harmony import */ var _changeToUnpressed__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./changeToUnpressed */ "./src/js/changeToUnpressed.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -505,7 +561,7 @@ function mouseEvents(event) {
       break;
 
     case 'CapsLock':
-      Object(_keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
+      Object(_changeToPressed__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
       this.capsLockEvent(button);
       break;
 
@@ -517,8 +573,8 @@ function mouseEvents(event) {
       break;
 
     default:
-      Object(_keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
-      Object(_keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_1__["default"])(button);
+      Object(_changeToPressed__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
+      Object(_changeToUnpressed__WEBPACK_IMPORTED_MODULE_1__["default"])(button);
       this.writeSymbolEvent(button);
       if (!this.shiftPressed) this.shiftUnpressedEvent(button);
       break;

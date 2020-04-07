@@ -1,4 +1,4 @@
-import getLocalLanguage from './keyboardView';
+import getLocalLanguage from './getLocalLanguage';
 
 function changeLanguage() {
     const language = getLocalLanguage();

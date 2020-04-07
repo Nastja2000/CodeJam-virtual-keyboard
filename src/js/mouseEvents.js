@@ -1,5 +1,5 @@
-import changeToPressed from './keyboardPressedEvents';
-import changeToUnpressed from './keyboardUnpressedEvents';
+import changeToPressed from './changeToPressed';
+import changeToUnpressed from './changeToUnpressed';
 
 function mouseEvents(event) {
     let button = event.target;

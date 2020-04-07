@@ -1,9 +1,9 @@
 // main actions  with keyboard will be there
 import createKeyboardView from './keyboardView';
-import getLocalLanguage from './keyboardView';
+import getLocalLanguage from './getLocalLanguage';
 import keyboardPressedEvents from './keyboardPressedEvents';
-import changeToPressed from './keyboardPressedEvents';
-import changeToUnpressed from './keyboardUnpressedEvents';
+import changeToPressed from './changeToPressed';
+import changeToUnpressed from './changeToUnpressed';
 import keyboardUnpressedEvents from './keyboardUnpressedEvents';
 import writeSymbol from './writeSymbol';
 import mouseEvents from './mouseEvents';
