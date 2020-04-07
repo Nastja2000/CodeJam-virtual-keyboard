@@ -1,4 +1,4 @@
-const writeSymbol = (button, textarea) => {
+function writeSymbol(button, textarea) {
     const inputArea = textarea;
     let currentSymbol = '';
     let codeOfButton = '';

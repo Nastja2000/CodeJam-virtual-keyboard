@@ -109,7 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var generateDomElement = function generateDomElement(currentNode, element) {
+function generateDomElement(currentNode, element) {
   var _currentNode$classLis;
 
   currentNode = document.createElement(element);
@@ -121,7 +121,7 @@ var generateDomElement = function generateDomElement(currentNode, element) {
   (_currentNode$classLis = currentNode.classList).add.apply(_currentNode$classLis, classes);
 
   return currentNode;
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (generateDomElement);
 
@@ -140,6 +140,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./keyboardPressedEvents */ "./src/js/keyboardPressedEvents.js");
 /* harmony import */ var _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./keyboardUnpressedEvents */ "./src/js/keyboardUnpressedEvents.js");
 /* harmony import */ var _writeSymbol__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./writeSymbol */ "./src/js/writeSymbol.js");
+/* harmony import */ var _mouseEvents__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mouseEvents */ "./src/js/mouseEvents.js");
+/* harmony import */ var _moveCursor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./moveCursor */ "./src/js/moveCursor.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -153,6 +155,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 // main actions  with keyboard will be there
+
+
 
 
 
@@ -220,11 +224,21 @@ textarea.addEventListener('keyup', _keyboardUnpressedEvents__WEBPACK_IMPORTED_MO
 textarea.addEventListener('blur', function () {
   return textarea.focus();
 });
+keyboardContainer.addEventListener('mousedown', _mouseEvents__WEBPACK_IMPORTED_MODULE_4__["default"].bind(keyboardContainer));
 
 keyboardContainer.writeSymbolEvent = function writeSymbolEvent(button) {
   Object(_writeSymbol__WEBPACK_IMPORTED_MODULE_3__["default"])(button, textarea);
+
+  if (this.shiftPressedByMouse) {
+    this.shiftUnpressedEvent(button, true);
+  }
+
   return true;
-}; // moveCursor
+};
+
+keyboardContainer.moveCursorEvent = function moveCursorEvent(button) {
+  Object(_moveCursor__WEBPACK_IMPORTED_MODULE_5__["default"])(button);
+};
 
 /***/ }),
 
@@ -237,13 +251,12 @@ keyboardContainer.writeSymbolEvent = function writeSymbolEvent(button) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _this = undefined;
-
-var changeToPressed = function changeToPressed(button) {
+function changeToPressed(button) {
+  var forceShiftToggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var shiftLeft = document.querySelector('.ShiftLeft');
   var shiftRight = document.querySelector('.ShiftRight');
 
-  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft')) {
+  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft') || forceShiftToggle) {
     shiftLeft.classList.toggle('keyboard__button_activate');
     shiftRight.classList.toggle('keyboard__button_activate');
   } else if (button.classList.contains('CapsLock')) {
@@ -253,48 +266,41 @@ var changeToPressed = function changeToPressed(button) {
   }
 
   return false;
-};
+}
 
-var keyboardPressedEvents = function keyboardPressedEvents(key) {
+function keyboardPressedEvents(key) {
   var keyCode = ".".concat(key.code);
   var button = document.querySelector(keyCode);
 
   switch (key.code) {
     case 'CapsLock':
       changeToPressed(button);
-
-      _this.capsLockEvent(button);
-
+      this.capsLockEvent(button);
       break;
 
     case 'ShiftLeft':
     case 'ShiftRight':
       changeToPressed(button);
-
-      _this.shiftPressedEvent(button);
-
+      this.shiftPressedEvent(button);
       break;
 
     case 'ArrowUp':
     case 'ArrowRight':
     case 'ArrowDown':
     case 'ArrowLeft':
-      // function for cursor moving
+      this.moveCursorEvent(button);
       break;
 
     default:
       changeToPressed(button);
-
-      _this.writeSymbolEvent(button);
-
+      this.writeSymbolEvent(button);
       break;
   }
 
-  _this.pressedButton.add(key.code);
-
-  if (_this.pressedButton.has('ShiftLeft') && _this.pressedButton.has('AltLeft')) _this.changeLanguageEvent();
+  this.pressedButton.add(key.code);
+  if (this.pressedButton.has('ShiftLeft') && this.pressedButton.has('AltLeft')) this.changeLanguageEvent();
   key.preventDefault();
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   keyboardPressedEvents: keyboardPressedEvents,
@@ -312,13 +318,12 @@ var keyboardPressedEvents = function keyboardPressedEvents(key) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _this = undefined;
-
-var changeToUnpressed = function changeToUnpressed(button) {
+function changeToUnpressed(button) {
+  var forceShiftToggle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var shiftLeft = document.querySelector('.ShiftLeft');
   var shiftRight = document.querySelector('.ShiftRight');
 
-  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft')) {
+  if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft') || forceShiftToggle) {
     shiftLeft.classList.toggle('keyboard__button_activate');
     shiftRight.classList.toggle('keyboard__button_activate');
   } else if (button.classList.contains('CapsLock')) {
@@ -328,17 +333,16 @@ var changeToUnpressed = function changeToUnpressed(button) {
   }
 
   return false;
-};
+}
 
-var keyboardUnpressedEvents = function keyboardUnpressedEvents(key) {
+function keyboardUnpressedEvents(key) {
   var keyCode = ".".concat(key.code);
   var button = document.querySelector(keyCode);
 
   switch (key.code) {
     case 'ShiftLeft':
     case 'ShiftRight':
-      _this.shiftUnpressedEvent(button);
-
+      this.shiftUnpressedEvent(button);
       break;
 
     default:
@@ -346,8 +350,8 @@ var keyboardUnpressedEvents = function keyboardUnpressedEvents(key) {
       break;
   }
 
-  _this.pressedButton["delete"](key.code);
-};
+  this.pressedButton["delete"](key.code);
+}
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   changeToUnpressed: changeToUnpressed,
@@ -381,11 +385,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var buttonsLayout = [[['Backquote', 'ё', 'Ё', '`', '~'], ['Digit1', '1', '!', '1', '!'], ['Digit2', '2', '"', '2', '@'], ['Digit3', '3', '№', '3', '#'], ['Digit4', '4', ';', '4', '$'], ['Digit5', '5', '%', '5', '%'], ['Digit6', '6', ':', '6', '^'], ['Digit7', '7', '?', '7', '&'], ['Digit8', '8', '*', '8', '*'], ['Digit9', '9', '(', '9', '('], ['Digit0', '0', ')', '0', ')'], ['Digit-', '-', '_', '-', '_'], ['Equal=', '=', '+', '=', '+'], ['Backspace', 'Backspace', 'Backspace', 'Backspace', 'Backspace']], [['Tab', 'Tab', 'Tab', 'Tab', 'Tab'], ['KeyQ', 'й', 'Й', 'q', 'Q'], ['KeyW', 'ц', 'Ц', 'w', 'W'], ['KeyE', 'у', 'У', 'e', 'E'], ['KeyR', 'к', 'К', 'r', 'R'], ['KeyT', 'е', 'Е', 't', 'T'], ['KeyY', 'н', 'Н', 'y', 'Y'], ['KeyU', 'г', 'Г', 'u', 'U'], ['KeyI', 'ш', 'Ш', 'i', 'I'], ['KeyO', 'щ', 'Щ', 'o', 'O'], ['KeyP', 'з', 'З', 'p', 'P'], ['BracketLeft', 'х', 'Х', '[', '{'], ['BracketRight', 'ъ', 'Ъ', ']', '}'], ['Backslash', '\\', '/', '\\', '|']], [['CapsLock', 'CapsLock', 'CapsLock', 'CapsLock', 'CapsLock'], ['KeyA', 'ф', 'Ф', 'a', 'A'], ['KeyS', 'ы', 'Ы', 's', 'S'], ['KeyD', 'в', 'В', 'd', 'D'], ['KeyF', 'а', 'А', 'f', 'F'], ['KeyG', 'п', 'П', 'g', 'G'], ['KeyH', 'р', 'Р', 'h', 'H'], ['KeyJ', 'о', 'О', 'j', 'J'], ['KeyK', 'л', 'Л', 'k', 'K'], ['KeyL', 'д', 'Д', 'l', 'L'], ['Semicolon', 'ж', 'Ж', ';', ':'], ['Quote', 'э', 'Э', '\'', '"'], ['Enter', 'Enter', 'Enter', 'Enter', 'Enter']], [['ShiftLeft', 'Shift', 'Shift', 'Shift', 'Shift'], ['KeyZ', 'я', 'Я', 'z', 'Z'], ['KeyX', 'ч', 'Ч', 'x', 'X'], ['KeyC', 'с', 'С', 'c', 'C'], ['KeyV', 'м', 'М', 'v', 'V'], ['KeyB', 'и', 'И', 'b', 'B'], ['KeyN', 'т', 'Т', 'n', 'N'], ['KeyM', 'ь', 'Ь', 'm', 'M'], ['Comma', 'б', 'Б', ',', '<'], ['Period', 'ю', 'Ю', '.', '>'], ['Slash', '.', ',', '/', '?'], ['ArrowUp', String.fromCharCode(8593), String.fromCharCode(8593), String.fromCharCode(8593), String.fromCharCode(8593)], ['ShiftRight', 'Shift', 'Shift', 'Shift', 'Shift']], [['ControlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['OSLeft', 'Win', 'Win', 'Win', 'Win'], ['AltLeft', 'Alt', 'Alt', 'Alt', 'Alt'], ['Space', 'Space', 'Space', 'Space', 'Space'], ['AltRight', 'Alt', 'Alt', 'Alt', 'Alt'], ['ControlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['ArrowLeft', String.fromCharCode(8592), String.fromCharCode(8592), String.fromCharCode(8592), String.fromCharCode(8592)], ['ArrowDown', String.fromCharCode(8595), String.fromCharCode(8595), String.fromCharCode(8595), String.fromCharCode(8595)], ['ArrowRight', String.fromCharCode(8594), String.fromCharCode(8594), String.fromCharCode(8594), String.fromCharCode(8594)]]];
 
-var getLocalLanguage = function getLocalLanguage() {
+function getLocalLanguage() {
   return localStorage.getItem('language') || 'en';
-};
+}
 
-var createKeyboardView = function createKeyboardView() {
+function createKeyboardView() {
   var wrapper = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(wrapper, 'div', 'wrapper');
   document.body.append(wrapper);
   var textarea = Object(_generalFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(textarea, 'textarea', 'textarea');
@@ -448,12 +452,208 @@ var createKeyboardView = function createKeyboardView() {
     keyboardContainer.append(document.createElement('br'));
   });
   wrapper.append(textarea, keyboardContainer);
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   createKeyboardView: createKeyboardView,
   getLocalLanguage: getLocalLanguage
 });
+
+/***/ }),
+
+/***/ "./src/js/mouseEvents.js":
+/*!*******************************!*\
+  !*** ./src/js/mouseEvents.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./keyboardPressedEvents */ "./src/js/keyboardPressedEvents.js");
+/* harmony import */ var _keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./keyboardUnpressedEvents */ "./src/js/keyboardUnpressedEvents.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+function mouseEvents(event) {
+  var button = event.target;
+  var codeOfButton = '';
+  if (event.target.classList.contains('keyboard__button')) button = event.target;else if (event.target.classList.contains('on')) button = event.target.parentNode.parentNode;else return false;
+
+  var _button$classList = _slicedToArray(button.classList, 2);
+
+  codeOfButton = _button$classList[1];
+
+  switch (codeOfButton) {
+    case 'ShiftLeft':
+    case 'ShiftRight':
+      this.shiftPressedByMouse = true;
+      if (!this.shiftPressed) this.shiftPressedEvent(button);
+      this.shiftUnpressedEvent(button);
+      break;
+
+    case 'CapsLock':
+      Object(_keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
+      this.capsLockEvent(button);
+      break;
+
+    case 'ArrowUp':
+    case 'ArrowRight':
+    case 'ArrowDown':
+    case 'ArrowLeft':
+      this.moveCursorEvent(button);
+      break;
+
+    default:
+      Object(_keyboardPressedEvents__WEBPACK_IMPORTED_MODULE_0__["default"])(button);
+      Object(_keyboardUnpressedEvents__WEBPACK_IMPORTED_MODULE_1__["default"])(button);
+      this.writeSymbolEvent(button);
+      if (!this.shiftPressed) this.shiftUnpressedEvent(button);
+      break;
+  }
+
+  return true;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (mouseEvents);
+
+/***/ }),
+
+/***/ "./src/js/moveCursor.js":
+/*!******************************!*\
+  !*** ./src/js/moveCursor.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function moveCursor(button) {
+  var textarea = document.querySelector('.textarea');
+  var currentPosition = textarea.selectionStart;
+
+  if (button.classList.contains('ArrowLeft')) {
+    document.getSelection().removeAllRanges();
+    if (currentPosition !== 0) textarea.setSelectionRange(currentPosition - 1, currentPosition - 1);
+  }
+
+  if (button.classList.contains('ArrowRight')) {
+    if (currentPosition !== 0) textarea.setSelectionRange(currentPosition + 1, currentPosition + 1);
+  }
+
+  if (button.classList.contains('ArrowUp')) {
+    var maxSize = 100;
+    var offsetX = 0;
+    var lengthBehindPosition = 0;
+    var i = currentPosition;
+    if (textarea.value[i] === '\n') i -= 1;
+
+    while (textarea.value[i] !== '\n' && i >= 0) {
+      offsetX += 1;
+      i -= 1;
+    }
+
+    if (textarea.value[i] === '\n') offsetX -= 1;
+
+    if (offsetX >= maxSize) {
+      textarea.setSelectionRange(currentPosition - maxSize, currentPosition - maxSize);
+      return true;
+    }
+
+    i -= 1;
+
+    while (textarea.value[i] !== '\n' && i >= 0) {
+      lengthBehindPosition += 1;
+      i -= 1;
+    }
+
+    lengthBehindPosition %= maxSize;
+
+    if (offsetX >= lengthBehindPosition) {
+      if (textarea.value[i] === '\n') offsetX += 1;
+      textarea.setSelectionRange(currentPosition - offsetX - 1, currentPosition - offsetX - 1);
+      return true;
+    }
+
+    if (offsetX < lengthBehindPosition) {
+      textarea.setSelectionRange(currentPosition - lengthBehindPosition - 1, currentPosition - lengthBehindPosition - 1);
+      return true;
+    }
+  }
+
+  if (button.classList.contains('ArrowDown')) {
+    var _maxSize = 100;
+    var offsetLeft = 0;
+    var offsetRight = 0;
+    var lengthInFrontOfPosition = 0;
+    var _i = currentPosition;
+
+    if (textarea.value[_i] === '\n') {
+      _i -= 1;
+    }
+
+    while (textarea.value[_i] !== '\n' && _i >= 0) {
+      offsetLeft += 1;
+      _i -= 1;
+    }
+
+    if (textarea.value[_i] === '\n' || _i < 0) {
+      offsetLeft -= 1;
+    }
+
+    _i = currentPosition;
+
+    while (textarea.value[_i] !== '\n' && _i < textarea.value.length) {
+      offsetRight += 1;
+      _i += 1;
+    }
+
+    offsetLeft %= _maxSize;
+
+    if (offsetLeft + offsetRight > _maxSize) {
+      if ((offsetLeft + offsetRight) % _maxSize <= offsetLeft) {
+        textarea.setSelectionRange(currentPosition + offsetRight, currentPosition + offsetRight);
+        return true;
+      }
+
+      textarea.setSelectionRange(currentPosition + _maxSize, currentPosition + _maxSize);
+      return true;
+    }
+
+    if (textarea.value[_i] === '\n') _i += 1;
+
+    while (textarea.value[_i] !== '\n' && _i < textarea.value.length) {
+      lengthInFrontOfPosition += 1;
+      _i += 1;
+    }
+
+    if (offsetLeft <= lengthInFrontOfPosition) {
+      textarea.setSelectionRange(currentPosition + offsetLeft + offsetRight + 1, currentPosition + offsetLeft + offsetRight + 1);
+      return true;
+    }
+
+    if (offsetLeft > lengthInFrontOfPosition) {
+      textarea.setSelectionRange(currentPosition + lengthInFrontOfPosition + offsetRight + 1, currentPosition + lengthInFrontOfPosition + offsetRight + 1);
+      return true;
+    }
+  }
+
+  return true;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (moveCursor);
 
 /***/ }),
 
@@ -486,7 +686,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var writeSymbol = function writeSymbol(button, textarea) {
+function writeSymbol(button, textarea) {
   var inputArea = textarea;
   var currentSymbol = '';
   var codeOfButton = '';
@@ -540,7 +740,7 @@ var writeSymbol = function writeSymbol(button, textarea) {
       inputArea.setRangeText(valueOfSymbol, inputArea.selectionStart, inputArea.selectionEnd, 'end');
       break;
   }
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (writeSymbol);
 

@@ -1,8 +1,8 @@
-const changeToUnpressed = (button) => {
+function changeToUnpressed(button, forceShiftToggle = false) {
     const shiftLeft = document.querySelector('.ShiftLeft');
     const shiftRight = document.querySelector('.ShiftRight');
 
-    if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft')) {
+    if (button.classList.contains('ShiftLeft') || button.classList.contains('ShiftLeft') || forceShiftToggle) {
         shiftLeft.classList.toggle('keyboard__button_activate');
         shiftRight.classList.toggle('keyboard__button_activate');
     } else if (button.classList.contains('CapsLock')) {
@@ -15,7 +15,7 @@ const changeToUnpressed = (button) => {
 }
 
 
-const keyboardUnpressedEvents = (key) => {
+function keyboardUnpressedEvents(key) {
     const keyCode = `.${key.code}`;
     const button = document.querySelector(keyCode);
     switch (key.code) {

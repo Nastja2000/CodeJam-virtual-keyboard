@@ -1,6 +1,6 @@
 import getLocalLanguage from './keyboardView';
 
-const changeLanguage = () => {
+function changeLanguage() {
     const language = getLocalLanguage();
     if (language === 'en') localStorage.setItem('language', 'ru');
     else localStorage.setItem('language', 'en');

@@ -1,4 +1,4 @@
-const generateDomElement = (currentNode, element, ...classes) => {
+function generateDomElement(currentNode, element, ...classes) {
     currentNode = document.createElement(element);
     currentNode.classList.add(...classes);
     return currentNode;

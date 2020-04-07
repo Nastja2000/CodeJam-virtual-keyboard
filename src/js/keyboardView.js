@@ -77,12 +77,12 @@ const buttonsLayout = [
     ],
 ];
 
-const getLocalLanguage = () => {
+function getLocalLanguage() {
     return localStorage.getItem('language') || 'en';
 }
 
 
-const createKeyboardView = () => {
+function createKeyboardView() {
     const wrapper = generateDomElement(wrapper, 'div', 'wrapper');
     document.body.append(wrapper);
 
