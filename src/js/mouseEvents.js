@@ -2,7 +2,6 @@ import changeToPressed from './changeToPressed';
 import changeToUnpressed from './changeToUnpressed';
 
 function mouseEvents(event) {
-    // const textarea = document.querySelector('.textarea');
     let button = event.target;
     let codeOfButton = '';
 

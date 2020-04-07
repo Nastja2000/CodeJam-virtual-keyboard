@@ -16,7 +16,6 @@ const changeRegister = () => {
 
     document.querySelectorAll('.keyboard__button').forEach((button) => {
         button.childNodes.forEach((element) => {
-            console.log(element);
             element.childNodes.forEach((item) => item.classList.toggle('on'))
         });
 
@@ -35,7 +34,6 @@ const changeRegisterByCapsLock = () => {
             !button.matches('.Digit-') && !button.classList.contains('Equal=') &&
             !button.matches('.Backslash') && !button.matches('.Slash')) {
             button.childNodes.forEach((element) => {
-                console.log(element);
                 element.childNodes.forEach((item) => item.classList.toggle('on'))
             });
         }
