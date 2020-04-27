@@ -1,0 +1,8 @@
+.keyboard-container {
+    width: 895px;
+    text-align: center;
+    background-color: $color-keys-container;
+    border-radius: 5px;
+    padding: 10px;
+    @include box-shadow(5px, 4px, 8px, $color-shadow);
+}
