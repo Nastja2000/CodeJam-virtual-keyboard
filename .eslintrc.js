@@ -4,11 +4,7 @@ module.exports = {
         "es6": true
     },
     "extends": [
-        "airbnb-base",
-        "eslint-config-prettier"
-    ],
-    "plugins": [
-        "eslint-plugin-prettier"
+        "airbnb-base"
     ],
     "globals": {
         "Atomics": "readonly",
