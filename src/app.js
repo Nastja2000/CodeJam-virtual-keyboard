@@ -39,11 +39,11 @@ textarea.addEventListener('keydown', keyPressed.default.keyboardPressedEvents.bi
 textarea.addEventListener('keyup', keyPressed.default.keyboardUnpressedEvents.bind(keyboardContainer));
 textarea.addEventListener('blur', () => textarea.focus());
 
-keyboardContainer.changeLanguageEvent = function changeLanguageEvent() {
+keyboardContainer.handleChangeLanguageEvent = function handleChangeLanguageEvent() {
   changeLanguage();
 };
 
-keyboardContainer.shiftPressedEvent = function shiftPressedEvent(button) {
+keyboardContainer.handleShiftPressedEvent = function handleShiftPressedEvent(button) {
   if (this.shiftPressed) return false;
   this.shiftPressed = true;
   changeRegister();
@@ -51,7 +51,7 @@ keyboardContainer.shiftPressedEvent = function shiftPressedEvent(button) {
   return true;
 };
 
-keyboardContainer.shiftUnpressedEvent = function shiftUnpressedEvent(button, forceShiftToggle = false) {
+keyboardContainer.handleShiftUnpressedEvent = function handleShiftUnpressedEvent(button, forceShiftToggle = false) {
   if (!this.shiftPressed) return false;
   this.shiftPressed = false;
   this.shiftPressedByMouse = false;
@@ -60,7 +60,7 @@ keyboardContainer.shiftUnpressedEvent = function shiftUnpressedEvent(button, for
   return true;
 };
 
-keyboardContainer.capsLockEvent = function capsLockEvent() {
+keyboardContainer.handleCapsLockEvent = function handleCapsLockEvent() {
   this.capsLockPressed = !this.capsLockPressed;
   changeRegister();
   return true;
@@ -68,14 +68,14 @@ keyboardContainer.capsLockEvent = function capsLockEvent() {
 
 keyboardContainer.addEventListener('mousedown', mouseEvents.bind(keyboardContainer));
 
-keyboardContainer.writeSymbolEvent = function writeSymbolEvent(button) {
+keyboardContainer.handleWriteSymbolEvent = function handleWriteSymbolEvent(button) {
   writeSymbol(button, textarea);
   if (this.shiftPressedByMouse) {
-    this.shiftUnpressedEvent(button, true);
+    this.handleShiftUnpressedEvent(button, true);
   }
   return true;
 };
 
-keyboardContainer.moveCursorEvent = function moveCursorEvent(button) {
+keyboardContainer.handleMoveCursorEvent = function handleMoveCursorEvent(button) {
   moveCursor(button);
 };

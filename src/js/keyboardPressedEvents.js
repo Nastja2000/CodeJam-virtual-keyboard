@@ -7,11 +7,11 @@ function keyboardPressedEvents(key) {
   switch (key.code) {
     case 'CapsLock':
       changeToPressed(button, true);
-      this.capsLockEvent();
+      this.handleCapsLockEvent();
       break;
     case 'ShiftLeft':
     case 'ShiftRight':
-      this.shiftPressedEvent(button);
+      this.handleShiftPressedEvent(button);
       break;
 
     case 'ArrowUp':
@@ -20,16 +20,16 @@ function keyboardPressedEvents(key) {
     case 'ArrowLeft':
       changeToPressed(button, true);
       changeToPressed(button, false);
-      this.moveCursorEvent(button);
+      this.handleMoveCursorEvent(button);
       break;
     default:
       changeToPressed(button, true);
-      this.writeSymbolEvent(button);
+      this.handleWriteSymbolEvent(button);
       break;
   }
 
   this.pressedButton.add(key.code);
-  if (this.pressedButton.has('ShiftLeft') && this.pressedButton.has('AltLeft')) this.changeLanguageEvent();
+  if (this.pressedButton.has('ShiftLeft') && this.pressedButton.has('AltLeft')) this.handleChangeLanguageEvent();
   key.preventDefault();
 }
 
@@ -39,7 +39,7 @@ function keyboardUnpressedEvents(key) {
   switch (key.code) {
     case 'ShiftLeft':
     case 'ShiftRight':
-      this.shiftUnpressedEvent(button);
+      this.handleShiftUnpressedEvent(button);
       break;
     default:
       changeToPressed(button, false);

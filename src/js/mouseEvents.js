@@ -16,25 +16,25 @@ function mouseEvents(event) {
     case 'ShiftLeft':
     case 'ShiftRight':
       this.shiftPressedByMouse = true;
-      if (!this.shiftPressed) this.shiftPressedEvent(button);
-      else this.shiftUnpressedEvent(button);
+      if (!this.shiftPressed) this.handleShiftPressedEvent(button);
+      else this.handleShiftUnpressedEvent(button);
       break;
     case 'CapsLock':
       changeToPressed(button, true);
-      this.capsLockEvent(button);
+      this.handleCapsLockEvent(button);
       break;
     case 'ArrowUp':
     case 'ArrowRight':
     case 'ArrowDown':
     case 'ArrowLeft':
-      this.moveCursorEvent(button);
+      this.handleMoveCursorEvent(button);
       changeToPressed(button, true);
       changeToPressed(button, false);
       break;
     default:
       changeToPressed(button, true);
       changeToPressed(button, false);
-      this.writeSymbolEvent(button);
+      this.handleWriteSymbolEvent(button);
       if (this.shiftPressed) this.shiftUnpressedEvent(button);
       break;
   }
