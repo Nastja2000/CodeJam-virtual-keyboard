@@ -69,10 +69,10 @@ function createKeyboardView() {
     keyboardContainer.append(document.createElement('br'));
   });
 
-  const textAboutChangingLanguage = generateDomElement('span', ['about-language']);
-  textAboutChangingLanguage.innerText = 'For changing language use \'ShiftLeft\' +  \'AltLeft\' button combination :)';
+  const changeLanguageMessage = generateDomElement('span', ['about-language']);
+  changeLanguageMessage.innerText = 'For changing language use \'ShiftLeft\' +  \'AltLeft\' button combination :)';
 
-  wrapper.append(textarea, keyboardContainer, textAboutChangingLanguage);
+  wrapper.append(textarea, keyboardContainer, changeLanguageMessage);
 }
 
 export default createKeyboardView;
